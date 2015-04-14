@@ -1,7 +1,24 @@
 * Excel
+** libs
 sudo easy_install xlrd
 sudo easy_install xlwt
 sudo easy_install xlutils
+** xlwt to create an Excel file
+#+BEGIN_SRC sh
+python
+import xlwt
+workbook = xlwt.Workbook()
+sheet0 = workbook.add_sheet("abc_SUITE")
+sheet0.write(0, 0, 'foobar')
+sheet0.write(5, 0, 'skip some rows')
+sheet0.col(0).width = 256 * (len("skip some rows") + 1)
+sheet1 = workbook.add_sheet("sbg_ft_dynamic_non_pbx_connect_SUITE")
+sheet1.write(0, 0, 'OK')
+
+workbook.save("foobar.xls")
+
+#+END_SRC
+
 * beautifulsoup
 ** Install
 #+begin_src sh
