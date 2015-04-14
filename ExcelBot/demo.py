@@ -15,6 +15,7 @@ http://127.0.0.1:8000/xxx_SUITE.html
 '''
 
 URL_INDEX_PAGE="http://127.0.0.1:8000/index.html"
+URL_SUITE_PAGE="http://127.0.0.1:8000/suite_result.html"
 
 import os.path
 DEMO_EXCEL_FILE_PATH=os.path.expanduser("~/Documents/simple-workbook.xls")
@@ -122,10 +123,49 @@ def parse_index_page(soup):
         result_list.append(result_tuple)
     return result_list
 
+TC_NUM_COLUMN = 0
+TC_CASE_COLUMN = 3
+TC_RESULT_COLUMN = 6
+def parse_suite_page(soup):
+    suite_result_table = soup.find('table')
+    rows = suite_result_table.tbody.findAll('tr')
+    print rows[0]
+    print rows[27]
+    for row in [rows[0], rows[65]]:
+        tc_num = str(row.findAll('td')[TC_NUM_COLUMN].text)
+        if tc_num: ## 对于init_per_suite等函数的时候，这里没有seq
+            tc_num = int(tc_num)
+            tc_case = str(row.findAll('td')[TC_CASE_COLUMN].text)
+            tc_result = str(row.findAll('td')[TC_RESULT_COLUMN].text)
+
+            print 'SEQ: ', tc_num
+            print 'TC: ', tc_case
+            print 'Result: ', tc_result
+
+
+def demo_suite_result_page():
+    soup = url_to_soup(URL_SUITE_PAGE)
+    parse_suite_page(soup)
+
+import xlwt
+def demo_write_result_to_excel():
+    workbook = xlwt.Workbook()
+    sheet0 = workbook.add_sheet("abc_SUITE")
+    sheet0.write(0, 0, 'foobar')
+    sheet0.write(0, 1, 'OK')
+
+    sheet1 = workbook.add_sheet("xyz_SUITE")
+    sheet1.write(0, 0, 'abc')
+    sheet1.write(0, 1, 'FAILED')
+
+    workbook.save("foobar.xls")
+
 if __name__ == '__main__':
-    demo_excel_basics(DEMO_EXCEL_FILE_PATH)
-    demo_ct_result_basics()
+    ## demo_excel_basics(DEMO_EXCEL_FILE_PATH)
+    ## demo_ct_result_basics()
 
     ## 演示基本的CT结果页面的基本操作
-    demo_ct_html()
-    demo_ct_index_page()
+    ## demo_ct_html()
+    ##demo_ct_index_page()
+    ## demo_suite_result_page()
+    demo_write_result_to_excel()
