@@ -1,0 +1,35 @@
+* Excel
+sudo easy_install xlrd
+sudo easy_install xlwt
+sudo easy_install xlutils
+* beautifulsoup
+** Install
+#+begin_src sh
+pip install beautifulsoup4
+#+end_src
+
+** get link from table
+#+BEGIN_SRC sh
+## Start a simple web server
+cd ExcelBot/web
+python -m SimpleHTTPServer
+
+import urllib2
+from bs4 import BeautifulSoup
+URL_INDEX_PAGE="http://127.0.0.1:8000/index.html"
+html = urllib2.urlopen(URL_INDEX_PAGE).read()
+print 'HTML:', html
+soup = BeautifulSoup(html)
+result_table = soup.find('table')
+rows = result_table.tbody.findAll('tr')
+row0 = rows[0]
+tds = row0.findAll('td')
+td0 = tds[0]
+type (td0)
+dir (td0)
+str(td0.getText())
+str(td0.text)
+link = td0.find('a')
+type(link)
+str(link.get('href'))
+#+END_SRC
