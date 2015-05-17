@@ -7,6 +7,7 @@
 
 URL_INDEX_PAGE="http://127.0.0.1:8000/index.html"
 TEMP_EXCEL_FILE_NAME="mytc.xls"
+TEST_CASE_RESULT_OK = "Ok"
 
 import urllib2
 from bs4 import BeautifulSoup
@@ -68,7 +69,14 @@ def parse_suite_page(soup):
             tc_num = int(tc_num)
             tc_case = str(row.findAll('td')[TC_CASE_COLUMN].text)
             tc_result = str(row.findAll('td')[TC_RESULT_COLUMN].text)
-            result_tuple = (tc_num, tc_case, tc_result)
+
+            if tc_result == TEST_CASE_RESULT_OK: ## TC结果是Ok的时候普通结果
+                result_tuple = (tc_num, tc_case, tc_result)
+            else:                                ## TC结果非Ok的时候，保存结果及链接地址
+                print "not ok result: ", tc_result
+                tc_case_link = row.findAll('td')[TC_CASE_COLUMN].find('a').get('href')
+                print "Link: ", tc_case_link
+                result_tuple = (tc_num, tc_case, (tc_result, tc_case_link))
             result_list.append(result_tuple)
     return result_list
 
@@ -99,7 +107,15 @@ def run_main():
         sheet.write(0, 0, "TC")
         for (tc_num, tc_name, tc_result) in test_cases_result:
             sheet.write(tc_num, 0, tc_name)
-            sheet.write(tc_num, 1, tc_result)
+            if tc_result == TEST_CASE_RESULT_OK:
+                sheet.write(tc_num, 1, tc_result)
+            else:
+                ## TC结果是FAILED的时候
+                ## 因为Hyperlink函数不支持超过255个字符的链接地址
+                ## 这里折衷的办法就是把链接地址写入结果后边的一个cell里边
+                (tc_not_ok_result, link) = tc_result
+                sheet.write(tc_num, 1, tc_not_ok_result)
+                sheet.write(tc_num, 2, link)
         max_tc_length = max([len(t[1]) for t in test_cases_result])
         sheet.col(0).width = max_tc_length * EXCEL_WIDTH_OF_ZERO_CHARACTER
     workbook.save(TEMP_EXCEL_FILE_NAME)
