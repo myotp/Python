@@ -19,6 +19,13 @@ workbook.save("foobar.xls")
 
 #+END_SRC
 
+** Run Local Testing
+#+BEGIN_SRC sh
+cd ~/Python/ExcelBot/web
+python -m SimpleHTTPServer
+
+python main.py
+#+END_SRC
 * beautifulsoup
 ** Install
 #+begin_src sh
