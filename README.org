@@ -159,6 +159,7 @@ cd ~/Python/Flask
 python demo_flask.py
 #+END_SRC
 * Run Flask App on Google App Engine
+** Manually
 ID: hello-gae-flask
 
 #+BEGIN_SRC sh
@@ -175,4 +176,14 @@ curl http://localhost:8080
 ## Deploy
 appcfg.py --oauth2 -A hello-gae-flask update .
 curl http://hello-gae-flask.appspot.com
+#+END_SRC
+
+** PyCharm
+ID: hello-gae-pycharm
+Create Project: 'New Project' => Google App Engine + Flask + Jinja2
+Run in local dev server: 'Run' => Run HelloPyCharmAppEngine
+Upload to App Engine: 'Tools' => 'Google App Engine' => 'Upload App Engine app'
+
+#+BEGIN_SRC sh
+pip install -r requirements.txt -t lib
 #+END_SRC
