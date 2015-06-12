@@ -141,11 +141,14 @@ curl 127.0.0.1:8080/demo.json | jq "."
 #+END_SRC
 
 ** Upload Application
+Create Project in GAE console => hello-gae-jiawang
 #+BEGIN_SRC sh
-Create Project in GAE console
-hello-gae-jiawang
 cd ~/Python
 appcfg.py --oauth2 -A hello-gae-jiawang update HelloGoogleAppEngine
 curl http://hello-gae-jiawang.appspot.com
 curl http://hello-gae-jiawang.appspot.com/demo.json | jq "."
 #+END_SRC
+
+** Deploy with GUI launcher
+File => Add Existing Application Settings.
+Need to specify application ID in app.yaml config file.

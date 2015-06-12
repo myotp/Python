@@ -8,7 +8,7 @@ class MainPage(webapp2.RequestHandler):
 class DemoJson(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'application/json'
-        self.response.write('{"name":"Jia Wang", "age":33}')
+        self.response.write('{"name":"Jia Wang", "age":100}')
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
