@@ -1,3 +1,42 @@
+* pythonbrew
+#+BEGIN_SRC sh
+sudo easy_install pip
+sudo pip install --upgrade pip
+sudo pip install pythonbrew
+
+## init
+pythonbrew_install
+## fix distribute_steup.py
+~/.pythonbrew/etc/config.cfg
+[distribute]
+url = https://bitbucket.org/tarek/distribute/raw/default/distribute_setup.py
+
+## fix ~/.bashrc or ~/.bash_profile
+echo '[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"' >> ~/.bashrc
+
+## Update pythonbrew
+pythonbrew update
+
+## show all known Python versions
+pythonbrew list --know
+
+## show existing Python
+pythonbrew list
+
+brew link --force openssl
+## install a Python
+pythonbrew install 2.7.7
+pythonbrew uninstall 2.7.7
+
+## use a version
+pythonbrew switch 2.7.7
+pythonbrew off
+
+## fix readline on Mac
+cp /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload/readline.so ~/.pythonbrew/pythons/Python-2.7.7/lib/python2.7/lib-dynload/readline.so
+
+#+END_SRC
+
 * Excel
 ** libs
 sudo easy_install xlrd
@@ -57,3 +96,7 @@ link = td0.find('a')
 type(link)
 str(link.get('href'))
 #+END_SRC
+
+* webapp2
+pip install webapp2
+
