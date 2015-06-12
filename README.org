@@ -98,5 +98,15 @@ str(link.get('href'))
 #+END_SRC
 
 * webapp2
-pip install webapp2
+** simple demo
+#+BEGIN_SRC sh
+sudo pip install WebOb
+sudo pip install Paste
+sudo pip install webapp2
+
+cd ~/Python/Webapp2
+python demo_webapp2.py
+curl 127.0.0.1:8080
+#+END_SRC
+
 
