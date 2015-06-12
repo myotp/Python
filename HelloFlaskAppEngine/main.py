@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """`main` is the top level module for your Flask application."""
 
 # Import the Flask Framework
@@ -10,4 +12,4 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    return 'Hello Google App Engine and Flask Framework!'
+    return 'Hello Google App Engine and Flask Framework! 中文简体'
