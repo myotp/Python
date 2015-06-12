@@ -158,3 +158,21 @@ sudo pip install Flask
 cd ~/Python/Flask
 python demo_flask.py
 #+END_SRC
+* Run Flask App on Google App Engine
+ID: hello-gae-flask
+
+#+BEGIN_SRC sh
+cd ~/Python/HelloFlaskAppEngine/
+
+## Install 3rd party libraries to deps directory
+pip install -r requirements.txt -t deps
+ls deps
+
+## Run local testing server
+dev_appserver.py .
+curl http://localhost:8080
+
+## Deploy
+appcfg.py --oauth2 -A hello-gae-flask update .
+curl http://hello-gae-flask.appspot.com
+#+END_SRC
