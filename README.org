@@ -117,3 +117,35 @@ python demo_wsgi.py
 curl 127.0.0.1:8080
 #+END_SRC
 
+* Google App Engine
+** Install Python SDK
+Drag GoogleAppEngineLauncher.app to ~/GAE
+#+BEGIN_SRC sh
+open ~/GAE/GoogleAppEngineLauncher.app
+
+## create symbolic links
+ls -l /usr/local/bin/dev_appserver.py
+ls -l /usr/local/google_appengine
+#+END_SRC
+** Hello Google App Engine
+#+BEGIN_SRC sh
+cd ~/Python/HelloGoogleAppEngine
+ls
+#+END_SRC
+** Run Local Testing
+#+BEGIN_SRC sh
+cd ~/Python
+dev_appserver.py HelloGoogleAppEngine
+curl 127.0.0.1:8080
+curl 127.0.0.1:8080/demo.json | jq "."
+#+END_SRC
+
+** Upload Application
+#+BEGIN_SRC sh
+Create Project in GAE console
+hello-gae-jiawang
+cd ~/Python
+appcfg.py --oauth2 -A hello-gae-jiawang update HelloGoogleAppEngine
+curl http://hello-gae-jiawang.appspot.com
+curl http://hello-gae-jiawang.appspot.com/demo.json | jq "."
+#+END_SRC
