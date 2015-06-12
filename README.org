@@ -109,4 +109,11 @@ python demo_webapp2.py
 curl 127.0.0.1:8080
 #+END_SRC
 
+* wsgi
+** a simple demo
+#+BEGIN_SRC sh
+cd ~/Python/Network
+python demo_wsgi.py
+curl 127.0.0.1:8080
+#+END_SRC
 
