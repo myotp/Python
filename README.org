@@ -152,3 +152,9 @@ curl http://hello-gae-jiawang.appspot.com/demo.json | jq "."
 ** Deploy with GUI launcher
 File => Add Existing Application Settings.
 Need to specify application ID in app.yaml config file.
+* Flask
+#+BEGIN_SRC sh
+sudo pip install Flask
+cd ~/Python/Flask
+python demo_flask.py
+#+END_SRC
