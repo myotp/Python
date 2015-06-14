@@ -14,10 +14,10 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 
 # NDB cheat sheet: https://docs.google.com/document/d/1AefylbadN456_Z7BZOpZEXDq8cR8LYu7QgI7bt5V0Iw/mobilebasic
 # To save data in Google App Engine Data Store
-class Art(db.Model):
-    title = db.StringProperty(required=True)
-    art = db.TextProperty(required=True)
-    created = db.DateTimeProperty(auto_now_add=True)
+class Art(ndb.Model):
+    title = ndb.StringProperty(required=True)
+    art = ndb.TextProperty(required=True)
+    created = ndb.DateTimeProperty(auto_now_add=True)
 
 class MainHandler(webapp2.RequestHandler):
     def render_str(self, template, **params):
@@ -25,8 +25,8 @@ class MainHandler(webapp2.RequestHandler):
         return t.render(params)
 
     def render_front_page(self, title = "", art = "", error = ""):
-        arts = db.GqlQuery('SELECT * FROM Art ORDER BY created DESC')
-
+        #arts = db.GqlQuery('SELECT * FROM Art ORDER BY created DESC')
+        arts = Art.query().fetch()
         s = self.render_str('front.html', title=title, art=art, my_error_str=error, arts=arts)
         self.response.write(s)
 
