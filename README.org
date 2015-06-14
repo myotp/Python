@@ -187,3 +187,11 @@ Upload to App Engine: 'Tools' => 'Google App Engine' => 'Upload App Engine app'
 #+BEGIN_SRC sh
 pip install -r requirements.txt -t lib
 #+END_SRC
+
+* Jinja2
+** DemoAppEngineJinja2 Demo Jinja2 + Google App Engine
+Demo how to use Jinja2 in Google App Engine.
+Config library in app.yaml
+#+BEGIN_SRC sh
+cd ~/Python/DemoAppEngineJinja2
+#+END_SRC
