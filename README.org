@@ -157,6 +157,30 @@ ID: hello-gae-datastore
 #+BEGIN_SRC sh
 cd ~/Python/DemoDataStore
 #+END_SRC
+
+* GAE + REST + JSON
+** DemoAppEngineREST
+ID: hello-gae-rest
+#+BEGIN_SRC sh
+cd ~/Python/DemoAppEngineREST
+
+## Add a person
+curl --data "name=wangjia&age=88" http://127.0.0.1:8080/add_person_text
+curl -X POST --data "name=vivian&age=2" http://127.0.0.1:8080/add_person_text
+
+## Get persons
+curl http://127.0.0.1:8080/all_persons_text
+
+## Add person with JSON request
+curl -H "Content-Type: application/json" \
+     -X POST -d '{"name":"bob", "age":55}' \
+     http://127.0.0.1:8080/add_person_json
+
+## Get persons JSON reply
+curl http://127.0.0.1:8080/all_persons_json | jq "."
+curl http://127.0.0.1:8080/all_persons_json | jq ".persons[0].name"
+#+END_SRC
+
 * Flask
 #+BEGIN_SRC sh
 sudo pip install Flask
