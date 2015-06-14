@@ -37,6 +37,7 @@ class MainHandler(webapp2.RequestHandler):
         title = self.request.get('title')
         art = self.request.get('art')
         print 'title: ', title, ' art: ', art
+        print '请求是：', self.request
         if title and art:
             # Save Art object to Data Store
             a = Art(title=title, art=art)
