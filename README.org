@@ -152,6 +152,11 @@ curl http://hello-gae-jiawang.appspot.com/demo.json | jq "."
 ** Deploy with GUI launcher
 File => Add Existing Application Settings.
 Need to specify application ID in app.yaml config file.
+** Data Store
+ID: hello-gae-datastore
+#+BEGIN_SRC sh
+cd ~/Python/DemoDataStore
+#+END_SRC
 * Flask
 #+BEGIN_SRC sh
 sudo pip install Flask
